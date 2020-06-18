@@ -7,7 +7,7 @@ stages {
     }
     post {
       always {
-      archiveArtifacts artifacts: 'project/target/*.war', followSymlinks: false
+      archiveArtifacts artifacts: 'project/target/*.war', followSymlinks: false onlyIfSuccessful: true
       }
     }
   }
