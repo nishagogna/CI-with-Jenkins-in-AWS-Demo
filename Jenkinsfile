@@ -4,7 +4,7 @@ stages {
   stage ('Test') {
     steps {
      
-    sh echo "Hello-world"
+    sh "echo "Hello-world""
     }
   }
 
