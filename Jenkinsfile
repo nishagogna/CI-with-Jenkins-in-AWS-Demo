@@ -5,6 +5,11 @@ stages {
     steps {
      sh 'mvn package'
     }
+    post {
+      always {
+      archiveArtifacts artifacts: 'project/target/*.war', followSymlinks: false
+      }
+    }
   }
 
 }
