@@ -54,7 +54,7 @@ stages {
                                 resolverId: "MAVEN_RESOLVER"
                             )
                     }
-            post {
+            /*post {
                 always {
                     //slackSend channel: '#cicd', message: 'Build Completed '
                     //jiraSendBuildInfo branch: 'DEMO-1', site: 'txdevopsbootcamp.atlassian.net'
@@ -62,7 +62,7 @@ stages {
                     
                     
                     }
-                }
+                }*/
         }
 
 }
