@@ -5,6 +5,7 @@ pipeline{
       maven "maven"
    }
 stages {
+  /*
   stage ('Build') {
     steps {
      sh 'mvn package'
@@ -15,6 +16,7 @@ stages {
       }
     }
   }
+  */
 
   stage ('Artifactory configuration') {
             steps {
