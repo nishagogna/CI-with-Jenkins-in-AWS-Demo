@@ -36,7 +36,7 @@ stages {
                 rtMavenResolver (
                     id: "MAVEN_RESOLVER",
                     serverId: "txdevops",
-                    releaseRepo: "libs-release",
+                    releaseRepo: "libs-release","jcenter",
                     snapshotRepo: "libs-snapshot"
                 )
                 
