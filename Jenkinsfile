@@ -54,6 +54,20 @@ stages {
                                 deployerId: "MAVEN_DEPLOYER",
                                 resolverId: "MAVEN_RESOLVER"
                             )
+                rtDownload (
+                  serverId: 'txdevops',
+                  failNoOp: true,
+                  spec: '''{
+                    "files": [
+                    {
+                      "pattern": "libs-release-local/ci/jenkins/aws/project/1.0.0/*.war",
+                      "target": "bazinga/"
+                    }
+                  ]
+                  }''',
+
+                    
+                )
                     }
             /*post {
                 always {
