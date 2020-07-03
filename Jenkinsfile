@@ -46,8 +46,8 @@ stages {
         stage ('Update version') {
           steps {
 
-               sh 'sed -i -e s/BUILD_NUMBER/1.0.0.${BUILD_NUMBER}/g $WORKSPACE/project/src/main/webapp/index.html'
-               sh 'sed -i -e s/BUILD_NUMBER/1.0.0.${BUILD_NUMBER}/g $WORKSPACE/project/src/main/Webapp/index.html'
+               sh 'sed -i -e s/BUILD_NUMBER/1.0.${BUILD_NUMBER}/g $WORKSPACE/project/src/main/webapp/index.html'
+               sh 'sed -i -e s/BUILD_NUMBER/1.0.${BUILD_NUMBER}/g $WORKSPACE/project/src/main/Webapp/index.html'
 
 
           }
@@ -73,7 +73,7 @@ stages {
                   spec: '''{
                     "files": [
                     {
-                      "pattern": "libs-release-local/ci/jenkins/aws/project/1.0.0.${BUILd_NUMBER}/*.war",
+                      "pattern": "libs-release-local/ci/jenkins/aws/project/1.0.${BUILd_NUMBER}/*.war",
                       "target": "bazinga/"
                     }
                   ]
