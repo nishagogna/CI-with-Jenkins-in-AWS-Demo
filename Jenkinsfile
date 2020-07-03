@@ -45,7 +45,7 @@ stages {
 
   stage ('Exec Maven') {
             steps {
-                slackSend channel: '#cicd', message: 'Build Started'
+               // slackSend channel: '#cicd', message: 'Build Started'
                 rtMavenRun (
                                 tool: "maven", // Tool name from Jenkins configuration
                                 pom: 'pom.xml',
