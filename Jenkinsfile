@@ -43,16 +43,23 @@ stages {
                 
             }
         }
-
-  stage ('Exec Maven') {
-            steps {
-               // slackSend channel: '#cicd', message: 'Build Started'
-               updateBuildVersion (
+        stage ('Update version') {
+          steps {
 
                sh 'sed -i -e s/BUILD_NUMBER/${BUILD_NUMBER}/g $WORKSPACE/project/src/main/webapp/index.html'
                sh 'sed -i -e s/BUILD_NUMBER/${BUILD_NUMBER}/g $WORKSPACE/project/src/main/Webapp/index.html'
 
-               )
+
+          }
+
+
+
+        }
+
+  stage ('Exec Maven') {
+            steps {
+               // slackSend channel: '#cicd', message: 'Build Started'
+
                 rtMavenRun (
                                 tool: "maven", // Tool name from Jenkins configuration
                                 pom: 'pom.xml',
