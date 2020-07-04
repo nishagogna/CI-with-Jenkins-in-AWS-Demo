@@ -63,9 +63,9 @@ stages {
 
             steps {
                
-                //slackSend channel: '#superleague', message: 'Build $BUILD_NUMBER started'
+                slackSend channel: '#superleague', message: 'Build  started'
                 //slackSend channel: '#superleague', message: 'color: \'#FFFF00\', message: "STARTED: Job \'${env.JOB_NAME} [${env.BUILD_NUMBER}]\' (${env.BUILD_URL})"'
-                  slackSend channel: '#superleague', message: 'color: \'#FFFF00\', message: "STARTED: Job \'${env.JOB_NAME} [${env.BUILD_NUMBER}]\' (${env.BUILD_URL})"'
+                  //slackSend channel: '#superleague', message: 'color: \'#FFFF00\', message: "STARTED: Job \'${env.JOB_NAME} [${env.BUILD_NUMBER}]\' (${env.BUILD_URL})"'
                 rtMavenRun (
                                 tool: "maven", // Tool name from Jenkins configuration
                                 pom: 'pom.xml',
