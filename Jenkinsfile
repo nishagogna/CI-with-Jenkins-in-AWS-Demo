@@ -66,7 +66,8 @@ stages {
 
 
             steps {
-               // slackSend channel: '#cicd', message: 'Build Started'
+               
+                slackSend channel: '#superleague', message: 'Build # ${BUILD_NUMBER} started'
 
                 rtMavenRun (
                                 tool: "maven", // Tool name from Jenkins configuration
@@ -90,15 +91,14 @@ stages {
                     
                 )
                     }
-            /*post {
+            post {
                 always {
                     //slackSend channel: '#cicd', message: 'Build Completed '
-                    //jiraSendBuildInfo branch: 'DEMO-1', site: 'txdevopsbootcamp.atlassian.net'
-                    //jiraComment body: "Build 'env.BUILD_NUMBER' completed with commit ", issueKey: 'DEMO-1'
+                    slackSend channel: '#superleague', message: 'Build # ${BUILD_NUMBER} completed.'
                     
                     
                     }
-                }*/
+                }
         }
 
   stage('Sonarqube') {
@@ -117,6 +117,14 @@ stages {
 
                 deploy adapters: [tomcat8(credentialsId: 'tomcat8', path: '', url: 'http://35.239.253.10:8080')], contextPath: 'WebApp', war: '**/bazinga/**/*.war'
             }
+             post {
+                always {
+                    //slackSend channel: '#cicd', message: 'Build Completed '
+                    slackSend channel: '#superleague', message: 'Build # ${BUILD_NUMBER} deployed.'
+                    
+                    
+                    }
+                }
 
 }
 
