@@ -97,7 +97,7 @@ stages {
             steps {
                 sh "ls -ltr ${WORKSPACE}/bazinga/ci/jenkins/aws/project/1.0.${BUILD_NUMBER}/*.war"
                 sh "id"
-                sh "scp   ${WORKSPACE}/bazinga/ci/jenkins/aws/project/1.0.${BUILD_NUMBER}/*.war 107.178.222.65:"
+                sh "sudo scp   ${WORKSPACE}/bazinga/ci/jenkins/aws/project/1.0.${BUILD_NUMBER}/*.war 107.178.222.65:"
                 //sh "ssh -i /var/lib/jenkins/keys/caseStudy.pem  ubuntu@13.58.247.254 sudo mv JavaWebApp-1.0.0.101.war ProdWebapp.war"
                 //sh "ssh -i /var/lib/jenkins/keys/caseStudy.pem  ubuntu@13.58.247.254 sudo cp *.war /opt/tomcat/webapps/"
                 //sh "ssh -i /var/lib/jenkins/keys/caseStudy.pem  ubuntu@18.223.162.120 sudo chown tomcat:tomcat /opt/tomcat/webapps/*.war"
