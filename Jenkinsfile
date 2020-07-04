@@ -57,9 +57,13 @@ stages {
         }
 
   stage ('Exec Maven') {
+
+            steps{
+              sh 'rm -rf $WORKSPACE/bazinga'
+            }
             steps {
                // slackSend channel: '#cicd', message: 'Build Started'
-                sh 'sudo rm -rf $WORKSPACE/bazinga'
+
                 rtMavenRun (
                                 tool: "maven", // Tool name from Jenkins configuration
                                 pom: 'pom.xml',
