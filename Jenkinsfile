@@ -48,6 +48,7 @@ stages {
 
                sh 'sed -i -e s/BUILD_NUMBER/1.0.${BUILD_NUMBER}/g $WORKSPACE/project/src/main/webapp/index.html'
                sh 'sed -i -e s/BUILD_NUMBER/1.0.${BUILD_NUMBER}/g $WORKSPACE/project/src/main/Webapp/index.html'
+              
 
 
           }
@@ -55,12 +56,7 @@ stages {
 
 
         }
-        stage ('Cleanup deploy folder'){
-
-          steps{
-              sh 'rm -rf $WORKSPACE/bazinga'
-            }
-        }
+       
 
   stage ('Exec Maven') {
 
@@ -127,6 +123,14 @@ stages {
                 }
 
 }
+stage ('Clean WorkSpace'){
+
+  steps{
+        cleanWs()
+
+  }
+}
+
 
 }
 }
