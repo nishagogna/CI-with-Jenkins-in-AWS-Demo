@@ -67,7 +67,7 @@ stages {
 
             steps {
                
-                slackSend channel: '#superleague', message: 'Build # ${BUILD_NUMBER} started'
+                slackSend channel: '#superleague', message: 'Build  started'
 
                 rtMavenRun (
                                 tool: "maven", // Tool name from Jenkins configuration
@@ -94,7 +94,7 @@ stages {
             post {
                 always {
                     //slackSend channel: '#cicd', message: 'Build Completed '
-                    slackSend channel: '#superleague', message: 'Build # ${BUILD_NUMBER} completed.'
+                    slackSend channel: '#superleague', message: 'Build completed.'
                     
                     
                     }
@@ -120,7 +120,7 @@ stages {
              post {
                 always {
                     //slackSend channel: '#cicd', message: 'Build Completed '
-                    slackSend channel: '#superleague', message: 'Build # ${BUILD_NUMBER} deployed.'
+                    slackSend channel: '#superleague', message: 'Build  deployed.'
                     
                     
                     }
