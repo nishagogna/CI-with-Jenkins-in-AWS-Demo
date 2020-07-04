@@ -59,7 +59,7 @@ stages {
   stage ('Exec Maven') {
             steps {
                // slackSend channel: '#cicd', message: 'Build Started'
-
+                sh 'sudo rm -rf $WORKSPACE/bazinga'
                 rtMavenRun (
                                 tool: "maven", // Tool name from Jenkins configuration
                                 pom: 'pom.xml',
@@ -106,7 +106,8 @@ stages {
  stage ('Deployment') {
            
             steps {
-                deploy adapters: [tomcat8(credentialsId: 'tomcat8', path: '', url: 'http://35.239.253.10:8080')], contextPath: 'WebApp', war: '**/bazinga/**/1.0.${BUILD_NUMBER}/*.war'
+
+                deploy adapters: [tomcat8(credentialsId: 'tomcat8', path: '', url: 'http://35.239.253.10:8080')], contextPath: 'WebApp', war: '**/bazinga/**/*.war'
             }
 
 }
