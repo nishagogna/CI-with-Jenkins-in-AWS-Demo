@@ -55,12 +55,16 @@ stages {
 
 
         }
+        stage ('Cleanup deploy folder'){
+
+          steps{
+              sh 'rm -rf $WORKSPACE/bazinga'
+            }
+        }
 
   stage ('Exec Maven') {
 
-            steps{
-              sh 'rm -rf $WORKSPACE/bazinga'
-            }
+
             steps {
                // slackSend channel: '#cicd', message: 'Build Started'
 
