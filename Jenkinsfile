@@ -63,7 +63,7 @@ stages {
 
             steps {
                
-                slackSend channel: '#superleague', message: 'Build  started'
+                slackSend channel: '#superleague', message: 'Build $BUILD_NUMBER started'
 
                 rtMavenRun (
                                 tool: "maven", // Tool name from Jenkins configuration
