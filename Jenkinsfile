@@ -106,7 +106,7 @@ stages {
  stage ('Deployment') {
            
             steps {
-                deploy adapters: [tomcat8(credentialsId: 'tomcat8', path: '', url: 'http://35.239.253.10:8080')], contextPath: 'WebApp', war: '**/bazinga/**/*.war'
+                deploy adapters: [tomcat8(credentialsId: 'tomcat8', path: '', url: 'http://35.239.253.10:8080')], contextPath: 'WebApp', war: '**/bazinga/**/1.0.${BUILD_NUMBER}/*.war'
             }
 
 }
