@@ -22,7 +22,7 @@ stages {
             steps {
                 rtServer (
                     id: "txdevops",
-                    url: "http://34.71.101.126:8082/artifactory",
+                    url: "http://35.232.28.126:8082/artifactory",
                     credentialsId: "jfrog"
                 )
 
@@ -112,7 +112,7 @@ stages {
            
             steps {
 
-                deploy adapters: [tomcat8(credentialsId: 'tomcat8', path: '', url: 'http://35.239.253.10:8080')], contextPath: 'WebApp', war: '**/bazinga/**/*.war'
+                deploy adapters: [tomcat8(credentialsId: 'tomcat8', path: '', url: 'http://34.68.107.254:8080')], contextPath: 'WebApp', war: '**/bazinga/**/*.war'
             }
              post {
                 always {
