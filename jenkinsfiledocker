@@ -1,0 +1,107 @@
+pipeline{
+  agent any
+  tools {
+      // Install the Maven version configured as "M3" and add it to the path.
+      maven "maven"
+   }
+stages {
+
+  stage ('Artifactory configuration') {
+            steps {
+                rtServer (
+                    id: "devops",
+                    url: "http://34.121.71.41:8082/artifactory",
+                    credentialsId: "jfrog"
+                )
+
+                rtMavenDeployer (
+                    id: "MAVEN_DEPLOYER",
+                    serverId: "devops",
+                    releaseRepo: "libs-release-local",
+                    snapshotRepo: "libs-snapshot-local"
+                )
+
+                rtMavenResolver (
+                    id: "MAVEN_RESOLVER",
+                    serverId: "devops",
+                    
+                    releaseRepo: "libs-release",
+                    snapshotRepo: "libs-snapshot"
+                )
+                
+            }
+        }
+        stage ('Build Version Update') {
+          steps {
+
+               sh 'sed -i -e s/BUILD_NUMBER/1.0.${BUILD_NUMBER}/g $WORKSPACE/project/src/main/webapp/index.html'
+               sh 'sed -i -e s/BUILD_NUMBER/1.0.${BUILD_NUMBER}/g $WORKSPACE/project/src/main/Webapp/index.html'
+
+
+          }
+
+
+
+        }
+
+  stage ('Exec Maven') {
+            steps {
+
+                rtMavenRun (
+                                tool: "maven", // Tool name from Jenkins configuration
+                                pom: 'pom.xml',
+                                goals: 'clean install ',
+                                deployerId: "MAVEN_DEPLOYER",
+                                resolverId: "MAVEN_RESOLVER"
+                            )
+                rtDownload (
+                  serverId: 'devops',
+                  failNoOp: true,
+                  spec: '''{
+                    "files": [
+                    {
+                      "pattern": "libs-release-local/ci/jenkins/aws/project/1.0.${BUILD_NUMBER}/*.war",
+                      "target": "superLeague/"
+                    }
+                  ]
+                  }''',
+
+                    
+                )
+                    }
+        }
+      
+stage('Docker Build'){
+  steps{
+    sh '''
+      cp -r project/target/*.war .
+      /usr/bin/docker build -t vikashforsrm/tomcatapp:${BUILD_NUMBER} .
+      /usr/bin/docker images
+      /usr/bin/docker login -u vikashforsrm -p Comeon2chat
+      /usr/bin/docker push vikashforsrm/tomcatapp:${BUILD_NUMBER}
+    '''
+  }
+}
+
+stage('Docker Deploy'){
+  steps{
+    sh '''
+      process=$(/usr/bin/docker ps | grep 9999| awk '{print $1}')
+      /usr/bin/docker kill $process
+      /usr/bin/docker pull vikashforsrm/tomcatapp:${BUILD_NUMBER}
+      /usr/bin/docker run -d -it --rm -p 9999:8080 vikashforsrm/tomcatapp:${BUILD_NUMBER}
+      
+      echo "Access application on -  http://34.71.186.178:9999/project-1.0.${BUILD_NUMBER}"
+      
+    '''
+  }
+}
+
+stage ('PostBuild Cleanup') {
+  steps{
+cleanWs()
+}
+}
+
+}
+}
