@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcatdemoapp-deployment-50001
+spec:
+  selector:
+    matchLabels:
+      app: tomcatdemoapp
+      department: tomcatdemoapp
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: tomcatdemoapp
+        department: tomcatdemoapp
+    spec:
+      containers:
+      - name: tomcatdemoapp
+        image: vikashforsrm/tomcatapp:1
+        env:
+        - name: "PORT"
+          value: "8080"
