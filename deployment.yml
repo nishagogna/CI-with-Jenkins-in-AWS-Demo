@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: tomcatdemoapp
-        image: vikashforsrm/tomcatapp:1
+        image: gcr.io/prime-hour-278005/tomcatapp:1
         env:
         - name: "PORT"
           value: "8080"
