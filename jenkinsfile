@@ -4,8 +4,11 @@ pipeline{
 stages {
   
   stage ('Build') {
-    steps {
-     sh 'mvn package'
+    steps {    
+       sh '''
+      export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+      mvn package
+      '''       
     }
 //post {
       //always {
