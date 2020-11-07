@@ -4,7 +4,7 @@
     <groupId>ci.jenkins.aws</groupId>
     <artifactId>proj3</artifactId>
     <version>1.0-RAMA</version>
-    <packaging>pom</packaging>
+    <packaging>war</packaging>
     <name>Project Build</name>
 
     <modules>
