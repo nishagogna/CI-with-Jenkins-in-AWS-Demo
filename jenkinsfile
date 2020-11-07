@@ -4,7 +4,7 @@ pipeline{
   stage (build) {
     steps {
      sh '''
-     export JAVA_HOME=/usr/bin/java
+     export JAVA_HOME=/usr
      mvn package
      '''
     }
