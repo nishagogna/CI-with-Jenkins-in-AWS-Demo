@@ -4,8 +4,12 @@
     <groupId>ci.jenkins.aws</groupId>
     <artifactId>proj3</artifactId>
     <version>1.0-RAMA</version>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <name>Project Build</name>
+
+    <modules>
+        <module>project</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
