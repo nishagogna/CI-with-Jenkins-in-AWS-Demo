@@ -3,16 +3,17 @@ pipeline{
   stages {  
   stage (build) {
     steps {
-     sh '''
-     export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-     mvn package
-     '''
+      sh '''
+      export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+      mvn package
+      '''
     }
     }
-    }
+    
     post {
-    always {
+     always {
     archiveArtifacts artifacts: 'project/target/*.war', followSymlinks: false onlyIfSuccessful: true
  }
  }
   }
+ }
