@@ -2,7 +2,14 @@ pipeline{
   agent any
   
 stages {
-  
+
+  stage ('Clean WorkSpace'){
+
+  steps{
+        cleanWs()
+
+  }
+}
   stage ('Build') {
     steps {    
        sh '''
