@@ -11,6 +11,7 @@ stages {
       mvn package
       '''       
     }
+    }
     
       stage('Sonarqube') {
               environment {
@@ -28,6 +29,6 @@ stages {
       //archiveArtifacts artifacts: 'project/target/*.war', followSymlinks: false onlyIfSuccessful: true
       
     
-  }
+  
 }
 }
