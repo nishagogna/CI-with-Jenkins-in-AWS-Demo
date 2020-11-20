@@ -84,7 +84,7 @@ stage ('Build') {
                     }
                 }*/
         }*/
-  stage('Sonarqube Analysis') {
+  /*stage('Sonarqube Analysis') {
       environment {
               scannerHome = tool 'sonar-scanner-4.3'
     }
@@ -93,7 +93,7 @@ stage ('Build') {
               sh "${scannerHome}/bin/sonar-scanner -Dsonar.project.settings=${WORKSPACE}/sonar-project.properties"
         }
     }
-    }        
+    }*/      
 
  stage ('Deployment') {
            
