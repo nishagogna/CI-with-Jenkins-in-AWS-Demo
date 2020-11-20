@@ -1,34 +1,113 @@
 pipeline{
   agent any
-  
+  tools {
+      // Install the Maven version configured as "M3" and add it to the path.
+      maven "maven"
+   }
 stages {
 
+  stage ('Artifactory configuration') {
+            steps {
+                rtServer (
+                    id: "devops",
+                    url: "http://34.71.202.133:8082/artifactory",
+                    credentialsId: "jfrog"
+                )
 
-  stage ('Build') {
-    steps {    
-       sh '''
-      export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-      mvn package
-      '''       
+                rtMavenDeployer (
+                    id: "MAVEN_DEPLOYER",
+                    serverId: "devops",
+                    releaseRepo: "libs-release-local",
+                    snapshotRepo: "libs-snapshot-local"
+                )
+
+                rtMavenResolver (
+                    id: "MAVEN_RESOLVER",
+                    serverId: "devops",
+                    
+                    releaseRepo: "libs-release",
+                    snapshotRepo: "libs-snapshot"
+                )
+                
+            }
+        }
+        stage ('Build Version Update') {
+          steps {
+
+               sh 'sed -i -e s/BUILD_NUMBER/1.0.${BUILD_NUMBER}/g $WORKSPACE/project/src/main/webapp/index.html'
+               sh 'sed -i -e s/BUILD_NUMBER/1.0.${BUILD_NUMBER}/g $WORKSPACE/project/src/main/Webapp/index.html'
+
+
+          }
+
+
+
+        }
+
+  stage ('Exec Maven') {
+            steps {
+               slackSend channel: '#devops', message: 'Build  started'
+
+                rtMavenRun (
+                                tool: "maven", // Tool name from Jenkins configuration
+                                pom: 'pom.xml',
+                                goals: 'clean install ',
+                                deployerId: "MAVEN_DEPLOYER",
+                                resolverId: "MAVEN_RESOLVER"
+                            )
+                rtDownload (
+                  serverId: 'devops',
+                  failNoOp: true,
+                  spec: '''{
+                    "files": [
+                    {
+                      "pattern": "libs-release-local/ci/jenkins/aws/project/1.0.${BUILD_NUMBER}/*.war",
+                      "target": "superLeague/"
+                    }
+                  ]
+                  }''',
+
+                    
+                )
+                    }
+            post {
+                always {
+                    slackSend channel: '#devops', message: 'Build  Completed'                    
+                    
+                    }
+                }
+        }
+  stage('Sonarqube Analysis') {
+      environment {
+              scannerHome = tool 'sonar-scanner-4.3'
     }
-    }
-    
-      stage('Sonarqube') {
-              environment {
-              scannerHome = tool 'sonarqube-4.3'
-              }
-        steps {
+    steps {
               withSonarQubeEnv('sonar') {
               sh "${scannerHome}/bin/sonar-scanner -Dsonar.project.settings=${WORKSPACE}/sonar-project.properties"
-              }
-          }
+        }
     }
-    
-//post {
-      //always {
-      //archiveArtifacts artifacts: 'project/target/*.war', followSymlinks: false onlyIfSuccessful: true
-      
-    
-  
+    }        
+
+ stage ('Deployment') {
+           
+            steps {
+
+            deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://34.69.70.88:8080')], contextPath: 'sample', war: '**/superLeague/**/*.war'
+
+            }
+          post {
+                success {
+                    slackSend channel: '#devops', message: 'Deployment  Completed'                    
+                    slackSend channel: '#devops', message: 'Deployment URL-- http://34.69.70.88:8080/sample'
+                    }
+                }
+
+}
+stage ('PostBuild Cleanup') {
+  steps{
+cleanWs()
+}
+}
+
 }
 }
