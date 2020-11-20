@@ -43,8 +43,15 @@ stages {
 
 
         }
-
-  stage ('Exec Maven') {
+stage ('Build') {
+    steps {    
+       sh '''
+      export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+      mvn package
+      '''       
+    }
+    }
+  /*stage ('Exec Maven') {
             steps {
                //slackSend channel: '#devops', message: 'Build  started'
 
@@ -76,7 +83,7 @@ stages {
                     
                     }
                 }*/
-        }
+        }*/
   stage('Sonarqube Analysis') {
       environment {
               scannerHome = tool 'sonar-scanner-4.3'
