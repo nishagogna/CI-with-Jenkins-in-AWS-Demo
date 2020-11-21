@@ -4,10 +4,10 @@
     <parent>
         <groupId>ci.jenkins.aws</groupId>
         <artifactId>demo</artifactId>
-        <version>1.0-${BUILD_NUMBER}</version>
+        <version>1.0-${BUILD_NUMBER}-NISHA</version>
     </parent>
 
-    <artifactId>project</artifactId>
+    <artifactId>superleaque</artifactId>
     <packaging>war</packaging>
     <name>Project</name>
  <dependencies>
