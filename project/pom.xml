@@ -9,7 +9,7 @@
 
     <artifactId>project</artifactId>
     <packaging>war</packaging>
-    <name>Project</name>
+    <name>demo</name>
  <dependencies>
         <!-- runtime dependency -->
         <dependency>
