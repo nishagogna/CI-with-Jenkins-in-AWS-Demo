@@ -7,7 +7,7 @@
         <version>1.0-${BUILD_NUMBER}-NISHA</version>
     </parent>
 
-    <artifactId>superleaque</artifactId>
+    <artifactId>project</artifactId>
     <packaging>war</packaging>
     <name>Project</name>
  <dependencies>
