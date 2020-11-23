@@ -115,7 +115,8 @@ stage('Source Code Scan via SonarQube') {
            
             steps {
 
-            deploy adapters: [tomcat(credentialsId: 'tomcat', path: '', url: 'http://34.122.172.175:8080')], contextPath: 'sample', war: '**/superLeague/**/*.war'
+            deploy adapters: [tomcat7(credentialsId: 'deployer', path: '', url: 'http://35.202.166.187:8080')], contextPath: 'superLeaque', war: '**/*.war'
+		//deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://34.70.188.141:8080')], contextPath: 'sample', war: '**/superLeague/**/*.war'
 
             }
           post {
