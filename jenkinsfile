@@ -19,7 +19,8 @@ stages {
 
   stage ('Build') {
     steps {    
-    slackSend channel: '#cicd-devops', message: 'Build  started'
+    //slackSend channel: '#cicd-devops', message: 'Build  started'
+    slackSend baseUrl: 'https://hooks.slack.com/services/', channel: '#cicd-devops', color: 'good', message: 'Build  started', notifyCommitters: true, tokenCredentialId: 'slack'
        
       sh '''
       export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
@@ -30,7 +31,7 @@ stages {
     post {
                 always {
                     //slackSend channel: '#devops', message: 'Build  Completed'                    
-                    slackSend baseUrl: 'https://hooks.slack.com/services/', channel: '#cicd-devops', color: 'good', message: 'test', notifyCommitters: true, tokenCredentialId: 'slack'
+                    slackSend baseUrl: 'https://hooks.slack.com/services/', channel: '#cicd-devops', color: 'good', message: 'Build  Completed', notifyCommitters: true, tokenCredentialId: 'slack'
                     }
                 }
 	}
@@ -119,8 +120,11 @@ stage('Source Code Scan via SonarQube') {
             }
           post {
                 success {
-                    slackSend channel: '#devops', message: 'Deployment  Completed'                    
-                    slackSend channel: '#devops', message: 'Deployment URL-- http://34.122.172.175:8080/sample'
+                    //slackSend channel: '#devops', message: 'Deployment  Completed'                    
+                    //slackSend channel: '#devops', message: 'Deployment URL-- http://35.202.166.187/:8080/sample'
+		    
+		    slackSend baseUrl: 'https://hooks.slack.com/services/', channel: '#cicd-devops', color: 'good', message: 'Deployment  Completed', notifyCommitters: true, tokenCredentialId: 'slack'
+		    slackSend baseUrl: 'https://hooks.slack.com/services/', channel: '#cicd-devops', color: 'good', message: 'Deployment URL-- http://34.122.172.175:8080/sample', notifyCommitters: true, tokenCredentialId: 'slack'
                     }
                 }
 
