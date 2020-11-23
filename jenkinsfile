@@ -108,13 +108,13 @@ stage('Source Code Scan via SonarQube') {
            
             steps {
 
-            deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://34.122.172.175:8080')], contextPath: 'sample', war: '**/superLeague/**/*.war'
+            deploy adapters: [tomcat(credentialsId: 'tomcat', path: '', url: 'http://34.122.172.175:8080')], contextPath: 'sample', war: '**/superLeague/**/*.war'
 
             }
           post {
                 success {
                     slackSend channel: '#devops', message: 'Deployment  Completed'                    
-                    slackSend channel: '#devops', message: 'Deployment URL-- http://34.70.188.141:8080/sample'
+                    slackSend channel: '#devops', message: 'Deployment URL-- http://34.122.172.175:8080/sample'
                     }
                 }
 
