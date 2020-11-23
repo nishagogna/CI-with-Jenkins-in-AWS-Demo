@@ -27,6 +27,12 @@ stages {
       '''     
           
     }
+    post {
+                always {
+                    slackSend channel: '#devops', message: 'Build  Completed'                    
+                    
+                    }
+                }
 	}
     
   /*stage('Source Code Scan via SonarQube') {
