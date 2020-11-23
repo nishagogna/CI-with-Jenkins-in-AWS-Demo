@@ -9,7 +9,7 @@ stages {
         }
         }
     
-     stage('Source') { // Get code
+     stage('SCM Checkout') { // Get code
       steps {
         // get code from our Git repository
         git 'https://github.com/nishagogna/CI-with-Jenkins-in-AWS-Demo'
@@ -28,7 +28,7 @@ stages {
     }
 	}
     
-  /*stage('Code Quality Check via SonarQube') {
+  stage('Code Quality Check via SonarQube') {
    steps {
        script {
        scannerHome = tool 'sonar-scanner-4.5';
@@ -37,7 +37,7 @@ stages {
                }
            }
        }
-   }*/
+   }
    
   /*stage ('artifactory') {
     steps { 
@@ -66,7 +66,7 @@ stages {
 
 	
 	
-		  stage ('Artifactory configuration') {
+stage ('Artifactory configuration') {
             steps {
                 rtServer (
                     id: "artifactory",
@@ -92,4 +92,4 @@ stages {
             }
         }
     }
-	}
+}
