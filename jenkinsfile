@@ -125,7 +125,7 @@ stage('Source Code Scan via SonarQube') {
                     //slackSend channel: '#devops', message: 'Deployment URL-- http://35.202.166.187/:8080/sample'
 		    
 		    slackSend baseUrl: 'https://hooks.slack.com/services/', channel: '#cicd-devops', color: 'good', message: 'Deployment  Completed', notifyCommitters: true, tokenCredentialId: 'slack'
-		    slackSend baseUrl: 'https://hooks.slack.com/services/', channel: '#cicd-devops', color: 'good', message: 'Deployment URL-- http://34.122.172.175:8080/sample', notifyCommitters: true, tokenCredentialId: 'slack'
+		    slackSend baseUrl: 'https://hooks.slack.com/services/', channel: '#cicd-devops', color: 'good', message: 'Deployment URL-- http://35.202.166.187:8080/superLeaque', notifyCommitters: true, tokenCredentialId: 'slack'
                     }
                 }
 
