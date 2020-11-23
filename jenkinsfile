@@ -19,7 +19,7 @@ stages {
 
   stage ('Build') {
     steps {    
-    slackSend channel: '#devops', message: 'Build  started'
+    slackSend channel: '#cicd-devops', message: 'Build  started'
        
       sh '''
       export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
@@ -29,8 +29,8 @@ stages {
     }
     post {
                 always {
-                    slackSend channel: '#devops', message: 'Build  Completed'                    
-                    
+                    //slackSend channel: '#devops', message: 'Build  Completed'                    
+                    slackSend baseUrl: 'https://hooks.slack.com/services/', channel: '#cicd-devops', color: 'good', message: 'test', notifyCommitters: true, tokenCredentialId: 'slack'
                     }
                 }
 	}
