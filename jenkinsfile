@@ -9,12 +9,12 @@ stages {
         }
         }
     
-    /*stage('SCM Checkout') { // Get code
+    stage('Source Code') { // Get code
       steps {
         // get code from our Git repository
         git 'https://github.com/nishagogna/CI-with-Jenkins-in-AWS-Demo'
       }
-    }*/
+    }
     
 
   stage ('Build') {
@@ -28,7 +28,7 @@ stages {
     }
 	}
     
-  /*stage('Code Quality Check via SonarQube') {
+  /*stage('Source Code Scan via SonarQube') {
    steps {
        script {
        scannerHome = tool 'sonar-scanner-4.5';
@@ -92,7 +92,7 @@ stage ('Artifactory configuration') {
             }
         }
 	
-stage('Code Quality Check via SonarQube') {
+stage('Source Code Scan via SonarQube') {
    steps {
        script {
        scannerHome = tool 'sonar-scanner-4.5';
