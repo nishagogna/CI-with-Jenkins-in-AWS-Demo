@@ -105,5 +105,3 @@ stage('Source Code Scan via SonarQube') {
    
     }
 }
-
-
