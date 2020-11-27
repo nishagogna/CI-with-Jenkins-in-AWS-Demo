@@ -74,7 +74,8 @@ stages {
 stage('Artifactory upload') {	
 	steps {
 	script {	
-	cd '${WORKSPACE/project/target'
+	//cd '${WORKSPACE/project/target'
+	sh "cd $workspace/project/target"
              def pattern= '**/nisha-1.0-46.war'
               def target= "http://35.225.214.160:8082/ui/repos/tree/General/libs-release-local"
 		echo "upload war is: $pattern"
