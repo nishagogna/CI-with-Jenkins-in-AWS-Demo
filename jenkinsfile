@@ -87,7 +87,7 @@ steps {
 }
 }
     
-stage('Artifactory upload') {	
+/*stage('Artifactory upload') {	
 	steps {
 	script {	
 	//cd '${WORKSPACE/project/target'
@@ -100,7 +100,7 @@ stage('Artifactory upload') {
          
     }
      }
-	}
+	}*/
 	
 	
 /*stage ('Artifactory configuration') {
