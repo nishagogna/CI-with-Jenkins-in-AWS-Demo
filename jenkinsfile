@@ -70,6 +70,8 @@ stages {
     }
     }
 	}*/
+	
+stage('Artifactory') {	
 def uploadSpec = """{
   "files": [
     {
@@ -78,6 +80,7 @@ def uploadSpec = """{
     }
  ]
 }"""
+}
     
 stage('Artifactory upload') {	
 	steps {
