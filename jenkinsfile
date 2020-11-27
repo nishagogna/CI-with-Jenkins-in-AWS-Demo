@@ -76,7 +76,7 @@ stage('Artifactory upload') {
 	script {	
 	//cd '${WORKSPACE/project/target'
 	sh "cd $workspace/project/target"
-             def pattern= "nisha-1.0-49.war"
+             def pattern= "nisha-1.0-50.war"
               def target= "http://35.225.214.160:8082/ui/repos/tree/General/nisha"
 		echo "upload war is: $pattern"
 		  echo "target location is ${target}"
