@@ -58,6 +58,7 @@ stages {
   }*/
 		
 /*stage('Artifactory upload') {	
+	
 	steps {
 	script {	
 	
@@ -72,14 +73,18 @@ stages {
 	}*/
 	
 stage('Artifactory') {	
-def uploadSpec = """{
-  "files": [
-    {
-      "pattern": "target/*nisha*.war",
-      "target": "libs-release-local/nisha/"
-    }
- ]
-}"""
+steps {
+	script {	
+	def uploadSpec = """{
+ 	 "files": [
+ 	   {
+     	 "pattern": "target/*nisha*.war",
+     	 "target": "libs-release-local/nisha/"
+    	}
+	 ]
+	}"""
+}
+}
 }
     
 stage('Artifactory upload') {	
