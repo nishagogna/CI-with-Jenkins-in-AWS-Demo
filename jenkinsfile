@@ -57,7 +57,7 @@ stages {
   }
   }*/
 		
-stage('Artifactory upload') {	
+/*stage('Artifactory upload') {	
 	steps {
 	script {	
 			pwd
@@ -69,9 +69,21 @@ stage('Artifactory upload') {
          
     }
      }
-	}
+	}*/
     
-
+stage('Artifactory upload') {	
+	steps {
+	script {	
+			pwd
+             def pattern= target/*nisha*.war
+              def target= "http://http://35.225.214.160/:8081/artifactory/libs-release/"
+		echo "pattern of war is: $pattern"
+		  echo "target location is ${target}"
+            upload_artifact('pattern': pattern, 'target': target)
+         
+    }
+     }
+	}
 	
 	
 /*stage ('Artifactory configuration') {
