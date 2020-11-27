@@ -79,7 +79,7 @@ steps {
  	 "files": [
  	   {
      	 "pattern": "target/*nisha*.war",
-     	 "target": "libs-release-local/nisha/"
+     	 "target": "libs-release-local"
     	}
 	 ]
 	}"""
