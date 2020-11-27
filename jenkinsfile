@@ -60,7 +60,7 @@ stages {
 /*stage('Artifactory upload') {	
 	steps {
 	script {	
-			pwd
+	
              def pattern= "*.war"
               def target= "http://35.225.214.160/:8081/artifactory/libs-release/"
 			  echo "pattern of war is: $pattern"
@@ -75,8 +75,8 @@ stage('Artifactory upload') {
 	steps {
 	script {	
 	pwd
-             def pattern= project/target/*nisha*.war
-              def target= http://35.225.214.160:8082/ui/repos/tree/General/libs-release
+             def pattern= "${WORKSPACE}/project/target/*nisha*.war"
+              def target= "http://35.225.214.160:8082/ui/repos/tree/General/libs-release"
 		echo "pattern of war is: $pattern"
 		  echo "target location is ${target}"
             upload_artifact('pattern': pattern, 'target': target)
