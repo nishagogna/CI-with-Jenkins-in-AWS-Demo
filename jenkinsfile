@@ -70,6 +70,14 @@ stages {
     }
     }
 	}*/
+def uploadSpec = """{
+  "files": [
+    {
+      "pattern": "target/*nisha*.war",
+      "target": "libs-release-local/nisha/"
+    }
+ ]
+}"""
     
 stage('Artifactory upload') {	
 	steps {
