@@ -57,24 +57,24 @@ stages {
   }
   }*/
 		
-/*stage('Artifactory upload') {	
+stage('Artifactory upload') {	
 	steps {
 	script {	
 			pwd
              def pattern= "*.war"
-              def target= "http://104.198.191.157:8081/artifactory/libs-release/"
+              def target= "http://http://35.225.214.160/:8081/artifactory/libs-release/"
 			  echo "pattern of war is: $pattern"
 			  echo "target location is ${target}"
             upload_artifact('pattern': pattern, 'target': target)
          
     }
      }
-	}*/
+	}
     
 
 	
 	
-stage ('Artifactory configuration') {
+/*stage ('Artifactory configuration') {
             steps {
                 rtServer (
                     id: "artifactory",
@@ -98,7 +98,7 @@ stage ('Artifactory configuration') {
                 )
                 
             }
-        }
+        }*/
 	
 stage('Source Code Scan via SonarQube') {
    steps {
