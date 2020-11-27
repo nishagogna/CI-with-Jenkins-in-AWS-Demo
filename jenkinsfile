@@ -62,7 +62,7 @@ stages {
 	script {	
 			pwd
              def pattern= "*.war"
-              def target= "http://http://35.225.214.160/:8081/artifactory/libs-release/"
+              def target= "http://35.225.214.160:8082/"
 			  echo "pattern of war is: $pattern"
 			  echo "target location is ${target}"
             upload_artifact('pattern': pattern, 'target': target)
