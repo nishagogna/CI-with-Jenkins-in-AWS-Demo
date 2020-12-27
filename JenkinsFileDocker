@@ -1,37 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@nishagogna 
-Learn Git and GitHub without any code!
-Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
-
-
-aktech71
-/
-CI-with-Jenkins-in-AWS-Demo
-forked from RAMKIDEVOPS/CI-with-Jenkins-in-AWS-Demo
-0
-0823
-Code
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-CI-with-Jenkins-in-AWS-Demo/JenkinsFileDocker
-@aktech71
-aktech71 Update JenkinsFileDocker
-Latest commit c289186 on Aug 16
- History
- 1 contributor
-107 lines (86 sloc)  2.86 KB
-  
 pipeline{
   agent any
   tools {
@@ -139,15 +105,3 @@ cleanWs()
 
 }
 }
-© 2020 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
