@@ -1,0 +1,153 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@nishagogna 
+Learn Git and GitHub without any code!
+Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
+
+
+aktech71
+/
+CI-with-Jenkins-in-AWS-Demo
+forked from RAMKIDEVOPS/CI-with-Jenkins-in-AWS-Demo
+0
+0823
+Code
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+CI-with-Jenkins-in-AWS-Demo/JenkinsFileDocker
+@aktech71
+aktech71 Update JenkinsFileDocker
+Latest commit c289186 on Aug 16
+ History
+ 1 contributor
+107 lines (86 sloc)  2.86 KB
+  
+pipeline{
+  agent any
+  tools {
+      // Install the Maven version configured as "M3" and add it to the path.
+      maven "maven"
+   }
+stages {
+
+  stage ('Artifactory configuration') {
+            steps {
+                rtServer (
+                    id: "devops",
+                    url: "http://35.232.63.93:8082/artifactory",
+                    credentialsId: "jfrog"
+                )
+
+                rtMavenDeployer (
+                    id: "MAVEN_DEPLOYER",
+                    serverId: "devops",
+                    releaseRepo: "libs-release-local",
+                    snapshotRepo: "libs-snapshot-local"
+                )
+
+                rtMavenResolver (
+                    id: "MAVEN_RESOLVER",
+                    serverId: "devops",
+                    
+                    releaseRepo: "libs-release",
+                    snapshotRepo: "libs-snapshot"
+                )
+                
+            }
+        }
+        stage ('Build Version Update') {
+          steps {
+
+               sh 'sed -i -e s/BUILD_NUMBER/1.0.${BUILD_NUMBER}/g $WORKSPACE/project/src/main/webapp/index.html'
+               sh 'sed -i -e s/BUILD_NUMBER/1.0.${BUILD_NUMBER}/g $WORKSPACE/project/src/main/Webapp/index.html'
+
+
+          }
+
+
+
+        }
+
+  stage ('Exec Maven') {
+            steps {
+
+                rtMavenRun (
+                                tool: "maven", // Tool name from Jenkins configuration
+                                pom: 'pom.xml',
+                                goals: 'clean install ',
+                                deployerId: "MAVEN_DEPLOYER",
+                                resolverId: "MAVEN_RESOLVER"
+                            )
+                rtDownload (
+                  serverId: 'devops',
+                  failNoOp: true,
+                  spec: '''{
+                    "files": [
+                    {
+                      "pattern": "libs-release-local/ci/jenkins/aws/project/1.0.${BUILD_NUMBER}/*.war",
+                      "target": "superLeague/"
+                    }
+                  ]
+                  }''',
+
+                    
+                )
+                    }
+        }
+      
+stage('Docker Build'){
+  steps{
+    sh '''
+      cp -r project/target/*.war .
+      /usr/bin/docker build -t aktech71/tomcatdemo:${BUILD_NUMBER} .
+      /usr/bin/docker images
+      /usr/bin/docker login -u aktech71 -p classic_123
+      /usr/bin/docker push aktech71/tomcatdemo:${BUILD_NUMBER}
+    '''
+  }
+}
+
+stage('Docker Deploy'){
+  steps{
+    sh '''
+      process=$(/usr/bin/docker ps | grep 8888| awk '{print $1}')
+      /usr/bin/docker kill $process
+      /usr/bin/docker pull aktech71/tomcatdemo:${BUILD_NUMBER}
+      /usr/bin/docker run -d -it --rm -p 8888:8080 aktech71/tomcatdemo:${BUILD_NUMBER}
+      
+      echo "Access application on -  http://34.70.7.16:8888/project-1.0.${BUILD_NUMBER}"
+      
+    '''
+  }
+}
+
+stage ('PostBuild Cleanup') {
+  steps{
+cleanWs()
+}
+}
+
+}
+}
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
