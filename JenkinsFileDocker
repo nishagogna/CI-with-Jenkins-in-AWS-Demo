@@ -51,20 +51,7 @@ stages {
       mvn clean install
       '''     
                 
-                rtDownload (
-                  serverId: 'devops',
-                  failNoOp: true,
-                  spec: '''{
-                    "files": [
-                    {
-                      "pattern": "libs-release-local/ci/jenkins/aws/project/1.0.${BUILD_NUMBER}/*.war",
-                      "target": "superLeague/"
-                    }
-                  ]
-                  }''',
-
-                    
-                )
+              
                     }
         }
       
