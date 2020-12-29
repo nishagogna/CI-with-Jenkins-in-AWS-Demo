@@ -75,7 +75,7 @@ stage('Docker Deploy'){
       /usr/bin/docker pull gudia/tomcatdemo:${BUILD_NUMBER}
       /usr/bin/docker run -d -it --rm -p 8888:8080 gudia/tomcatdemo:${BUILD_NUMBER}
       
-      echo "Access application on -  http://35.238.75.136:8888/project-1.0.${BUILD_NUMBER}"
+      echo "Access application on -  http://35.238.75.136:8888/nisha-1.0.${BUILD_NUMBER}"
       
     '''
   }
