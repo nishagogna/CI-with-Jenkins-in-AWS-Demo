@@ -1,17 +1,17 @@
 pipeline{
   agent any
-  tools {
+  /*tools {
       // Install the Maven version configured as "M3" and add it to the path.
       maven "maven"
-   }
+   }*/
 stages {
 
   stage ('Artifactory configuration') {
             steps {
                 rtServer (
                     id: "devops",
-                    url: "http://35.232.63.93:8082/artifactory",
-                    credentialsId: "jfrog"
+                    url: "http://35.239.17.251:8082/artifactory",
+                    credentialsId: "Demo@1234"
                 )
 
                 rtMavenDeployer (
@@ -75,10 +75,10 @@ stage('Docker Build'){
   steps{
     sh '''
       cp -r project/target/*.war .
-      /usr/bin/docker build -t aktech71/tomcatdemo:${BUILD_NUMBER} .
+      /usr/bin/docker build -t gudia/tomcatdemo:${BUILD_NUMBER} .
       /usr/bin/docker images
-      /usr/bin/docker login -u aktech71 -p classic_123
-      /usr/bin/docker push aktech71/tomcatdemo:${BUILD_NUMBER}
+      /usr/bin/docker login -u gudia -p Demo@1234
+      /usr/bin/docker push gudia/tomcatdemo:${BUILD_NUMBER}
     '''
   }
 }
@@ -88,10 +88,10 @@ stage('Docker Deploy'){
     sh '''
       process=$(/usr/bin/docker ps | grep 8888| awk '{print $1}')
       /usr/bin/docker kill $process
-      /usr/bin/docker pull aktech71/tomcatdemo:${BUILD_NUMBER}
-      /usr/bin/docker run -d -it --rm -p 8888:8080 aktech71/tomcatdemo:${BUILD_NUMBER}
+      /usr/bin/docker pull gudia/tomcatdemo:${BUILD_NUMBER}
+      /usr/bin/docker run -d -it --rm -p 8888:8080 gudia/tomcatdemo:${BUILD_NUMBER}
       
-      echo "Access application on -  http://34.70.7.16:8888/project-1.0.${BUILD_NUMBER}"
+      echo "Access application on -  http://35.238.75.136:8888/project-1.0.${BUILD_NUMBER}"
       
     '''
   }
