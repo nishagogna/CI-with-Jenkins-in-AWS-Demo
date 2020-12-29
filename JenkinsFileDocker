@@ -46,14 +46,11 @@ stages {
 
   stage ('Exec Maven') {
             steps {
-
-                rtMavenRun (
-                                tool: "maven", // Tool name from Jenkins configuration
-                                pom: 'pom.xml',
-                                goals: 'clean install ',
-                                deployerId: "MAVEN_DEPLOYER",
-                                resolverId: "MAVEN_RESOLVER"
-                            )
+   sh '''
+      export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+      mvn clean install
+      '''     
+                
                 rtDownload (
                   serverId: 'devops',
                   failNoOp: true,
