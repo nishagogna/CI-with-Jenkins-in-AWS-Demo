@@ -81,11 +81,11 @@ stage('Docker Deploy'){
   }
 }
 
-stage ('PostBuild Cleanup') {
+/*stage ('PostBuild Cleanup') {
   steps{
 cleanWs()
 }
-}
+}*/
 
 }
 }
